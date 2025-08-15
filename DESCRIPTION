@@ -30,6 +30,6 @@ Suggests:
 Config/testthat/edition: 3
 Roxygen: list(markdown = TRUE)
 SystemRequirements: JAGS (>= 4.x)
-URL: https://github.com/YOUR_GH_USER/sparsesurv, https://doi.org/10.5281/zenodo.xxxxxxx
-BugReports: https://github.com/YOUR_GH_USER/sparsesurv/issues
+URL: https://github.com/alexangelakis-ang/sparsesurv
+BugReports: https://github.com/alexangelakis-ang/sparsesurv/issues
 RoxygenNote: 7.3.2
