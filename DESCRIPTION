@@ -1,0 +1,35 @@
+Package: sparsesurv
+Title: Forecasting and Early Outbreak Detection for Sparse Count Data
+Version: 0.1.0
+Authors@R: c(
+    person("Alexandros", "Angelakis",
+           email = "alexandros.angelakis@swisstph.ch",
+           role = c("aut", "cre")))
+Description: Tools for fitting, forecasting, and early detection of outbreaks in
+    sparse surveillance count time series. Supports negative binomial (NB),
+    self-exciting NB, GARMA-NB, zero-inflated NB (ZINB), self-exciting ZINB,
+    GARMA-ZINB, and hurdle formulations. Climatic and environmental covariates
+    can be included in the regression component and/or the zero-modified components.
+    Includes outbreak-detection algorithms for NB, ZINB, and hurdle models, with
+    utilities for prediction and diagnostics.
+License: GPL (>= 3)
+Encoding: UTF-8
+Depends: 
+    R (>= 4.1)
+Imports:
+    R2jags,
+    coda,
+    stats
+Suggests:
+    rjags,
+    testthat (>= 3.0.0),
+    knitr,
+    rmarkdown,
+    ggplot2,
+    reshape2
+Config/testthat/edition: 3
+Roxygen: list(markdown = TRUE)
+SystemRequirements: JAGS (>= 4.x)
+URL: https://github.com/YOUR_GH_USER/sparsesurv, https://doi.org/10.5281/zenodo.xxxxxxx
+BugReports: https://github.com/YOUR_GH_USER/sparsesurv/issues
+RoxygenNote: 7.3.2
