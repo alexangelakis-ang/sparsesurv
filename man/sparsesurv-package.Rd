@@ -11,9 +11,8 @@ Tools for fitting, forecasting, and early detection of outbreaks in sparse surve
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/YOUR_GH_USER/sparsesurv}
-  \item \doi{10.5281/zenodo.xxxxxxx}
-  \item Report bugs at \url{https://github.com/YOUR_GH_USER/sparsesurv/issues}
+  \item \url{https://github.com/alexangelakis-ang/sparsesurv}
+  \item Report bugs at \url{https://github.com/alexangelakis-ang/sparsesurv/issues}
 }
 
 }

@@ -4,8 +4,8 @@
 #' @param pop              (Optional) Numeric vector of population offsets (length N). If NULL, offset = 1.
 #' @param covariates_count (Optional) Data.frame or matrix of covariates for the count model (N x p_c).
 #' @param covariates_zero  (Optional) Data.frame or matrix of covariates for the Hurdle model (N x p_z).
-#' @param beta_init        (Optional) List of length `n_chains` giving initial values for β (each a vector of length p_c+1).
-#' @param delta_init       (Optional) List of length `n_chains` giving initial values for δ (each a vector of length p_z+1).
+#' @param beta_init        (Optional) List of length `n_chains` giving initial values for beta (each a vector of length p_c+1).
+#' @param delta_init       (Optional) List of length `n_chains` giving initial values for delta (each a vector of length p_z+1).
 #' @param r_init           (Optional) Numeric vector of length `n_chains` giving initial values for the NB dispersion parameter.
 #' @param beta_prior_mean  Prior mean for beta coefficients of the Negative binomial part (default = 0).
 #' @param beta_prior_sd    Prior SD   for beta coefficients of the Negative binomial part (default = 10).
@@ -61,16 +61,16 @@ outbreakHNB <- function(
   if (!requireNamespace("R2jags", quietly = TRUE)) stop("Package R2jags is required.")
   if (!requireNamespace("coda", quietly = TRUE)) stop("Package coda is required.")
   if (!requireNamespace("rjags", quietly = TRUE)) stop("Package rjags is required for WAIC/dev calculations.")
-  
+
   N <- length(cases)
-  
+
   # if save_params was explicitly passed, ensure Z is included
   if (!missing(save_params)) {
     if (!("Z" %in% save_params)) {
       save_params <- c(save_params, "Z")
     }
   }
-  
+
   # Count covariate matrix with intercept
   if (!is.null(covariates_count)) {
     Xc1 <- as.matrix(covariates_count)
@@ -80,7 +80,7 @@ outbreakHNB <- function(
   }
   Xc <- cbind(Intercept = 1, Xc1)
   Kc <- ncol(Xc)
-  
+
   # Zero-inflation covariate matrix with intercept
   if (!is.null(covariates_zero)) {
     Xz1 <- as.matrix(covariates_zero)
@@ -90,7 +90,7 @@ outbreakHNB <- function(
   }
   Xz <- cbind(Intercept = 1, Xz1)
   Kz <- ncol(Xz)
-  
+
   # Offsets (your original names)
   if (is.null(pop)) {
     pop_vec <- rep(1, N)
@@ -102,7 +102,7 @@ outbreakHNB <- function(
     off1    <- "log(pop[1]) + "
   }
   zeros<-rep(0,N)
-  
+
   # Build model string using paste / paste0 with inline precision as you had it
   model_lines <- c(
     "model{",
@@ -156,22 +156,22 @@ outbreakHNB <- function(
     ""
   )
   model_string <- paste(model_lines, collapse = "\n")
-  
+
   model_file <- tempfile(fileext = ".bug")
   writeLines(model_string, model_file)
   on.exit(unlink(model_file), add = TRUE)
-  
+
   # Initial values
   if (is.null(beta_init))  beta_init  <- lapply(1:n_chains, function(i) rep(0, Kc))
   if (is.null(delta_init)) delta_init <- lapply(1:n_chains, function(i) rep(0, Kz))
   if (is.null(r_init))     r_init     <- seq(0.5, 0.5 + 0.5*(n_chains - 1), length.out = n_chains)
-  
+
   inits <- lapply(1:n_chains, function(i) list(
     beta  = beta_init[[i]],
     delta = delta_init[[i]],
     r     = r_init[i]
   ))
-  
+
   data4Jags <- list(
     Y  = cases,
     N  = N,
@@ -182,7 +182,7 @@ outbreakHNB <- function(
     Kz = Kz,
     zeros=zeros
   )
-  
+
   jags.out <- R2jags::jags(
     data               = data4Jags,
     inits              = inits,
@@ -193,20 +193,20 @@ outbreakHNB <- function(
     n.chains           = n_chains,
     n.thin             = n_thin
   )
-  
-  
+
+
   full_summary <- as.data.frame(jags.out$BUGSoutput$summary)
   full_summary$dic <- jags.out$BUGSoutput$DIC
-  
+
   # Filter out Z[...] rows for the main summary view
   summary_df <- full_summary[!grepl("^Z\\[", rownames(full_summary)), , drop = FALSE]
-  
-  
+
+
   # WAIC attempt (fallback-safe)
   s <- tryCatch({
     rjags::jags.samples(jags.out$model, c("WAIC", "deviance"), type = "mean", n.iter = 1000)
   }, error = function(e) NULL)
-  
+
   if (!is.null(s) && !is.null(s$WAIC) && !is.null(s$deviance)) {
     p_waic <- sum(s$WAIC)
     dev    <- sum(s$deviance)
@@ -214,10 +214,10 @@ outbreakHNB <- function(
   } else {
     waic_vals <- c(waic = NA, p_waic = NA)
   }
-  
-  
-  
-  
+
+
+
+
   ret <- list(
     mcmc_summary      = summary_df,
     mcmc_summary_full = full_summary,
@@ -225,7 +225,7 @@ outbreakHNB <- function(
     waic              = waic_vals,
     raw_output        = jags.out
   )
-  
+
   # Optional Z plot
   if (plot_Z) {
     # Extract posterior mean Z
@@ -244,7 +244,7 @@ outbreakHNB <- function(
         stop("Provided 'dates' must match length of Z (number of timepoints).")
       }
     }
-    
+
     # Build plotting data
     if (is.null(dim(Z_mean)) || length(dim(Z_mean)) == 1) {
       df_plot <- data.frame(date = dates_plot, value = as.numeric(Z_mean))
@@ -258,7 +258,7 @@ outbreakHNB <- function(
       }
       df_plot <- data.frame(date = d$date, value = d$value)
     }
-    
+
     sp <- ggplot2::ggplot(df_plot, ggplot2::aes(x = date, y = value)) +
       ggplot2::geom_point() +
       ggplot2::geom_line() +
@@ -268,7 +268,7 @@ outbreakHNB <- function(
                     x = if (!is.null(dates)) "Date" else "Index",
                     y = expression(E[Z]))
     ret$plot_Z <- sp
-    
+
     return(ret)
   }
 }

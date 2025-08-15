@@ -37,9 +37,9 @@ outbreakHNB(
 
 \item{covariates_zero}{(Optional) Data.frame or matrix of covariates for the Hurdle model (N x p_z).}
 
-\item{beta_init}{(Optional) List of length \code{n_chains} giving initial values for β (each a vector of length p_c+1).}
+\item{beta_init}{(Optional) List of length \code{n_chains} giving initial values for beta (each a vector of length p_c+1).}
 
-\item{delta_init}{(Optional) List of length \code{n_chains} giving initial values for δ (each a vector of length p_z+1).}
+\item{delta_init}{(Optional) List of length \code{n_chains} giving initial values for delta (each a vector of length p_z+1).}
 
 \item{r_init}{(Optional) Numeric vector of length \code{n_chains} giving initial values for the NB dispersion parameter.}
 

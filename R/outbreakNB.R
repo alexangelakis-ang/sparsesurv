@@ -4,7 +4,7 @@
 #' @param cases            Integer or numeric vector of observed case counts (length N).
 #' @param pop              (Optional) Numeric vector of population offsets (length N). If NULL, offset = 1.
 #' @param covariates   (Optional) Data.frame or matrix of covariates for the count model (N x p_c).
-#' @param beta_init        (Optional) List of length `n_chains` giving initial values for β (each a vector of length p_c+1).
+#' @param beta_init        (Optional) List of length `n_chains` giving initial values for beta (each a vector of length p_c+1).
 #' @param r_init           (Optional) Numeric vector of length `n_chains` giving initial values for the NB dispersion parameter.
 #' @param beta_prior_mean  Prior mean for beta coefficients of the Negative binomial part (default = 0).
 #' @param beta_prior_sd    Prior SD   for beta coefficients of the Negative binomial part (default = 10).
