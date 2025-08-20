@@ -4,7 +4,10 @@ Version: 0.1.0
 Authors@R: c(
     person("Alexandros", "Angelakis",
            email = "alexandros.angelakis@swisstph.ch",
-           role = c("aut", "cre")))
+           role = c("aut", "cre")),
+           person("Bryan","Nyawanda",role = "aut"),
+           person("Penelope","Vounatsou",role = "aut")
+           )
 Description: Tools for fitting, forecasting, and early detection of outbreaks in
     sparse surveillance count time series. Supports negative binomial (NB),
     self-exciting NB, GARMA-NB, zero-inflated NB (ZINB), self-exciting ZINB,
