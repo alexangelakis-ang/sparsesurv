@@ -19,5 +19,11 @@ Useful links:
 \author{
 \strong{Maintainer}: Alexandros Angelakis \email{alexandros.angelakis@swisstph.ch}
 
+Authors:
+\itemize{
+  \item Bryan Nyawanda
+  \item Penelope Vounatsou
+}
+
 }
 \keyword{internal}
