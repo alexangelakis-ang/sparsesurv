@@ -141,7 +141,8 @@ print(fit_outbreakzinb)
 
 ## Documentation
 
-- Function docs: `?SENB` after installing the package.
+- Detailed help for each function can be found in the package
+  documentation (e.g., ?SENB after installation) or the references.
 
 ## Background & references
 
@@ -152,16 +153,26 @@ print(fit_outbreakzinb)
 ## Contributing
 
 Issues and pull requests:
-<https://github.com/alexangelakis-ang/sparsesurv/issues>
+<https://github.com/alexangelakis-ang/sparsesurv/issues> or via e-mail
+to maintainer(“sparsesurv”).
 
 Please include a minimal reproducible example for bugs. For large
 features, open an issue to discuss first.
 
 ## Citing
 
-If you use **sparsesurv** in academic work, please cite the package. A
-Zenodo DOI: .
+If you use **sparsesurv** in academic work, please cite the package.
 
 ## License
 
-GPL (\>= 3). See `LICENSE` for details.
+The sparsesurv package is free and open-source software, and you are
+welcome to redistribute it under the terms of the GNU General Public
+License, version 3. This program is distributed in the hope that it will
+be useful, but WITHOUT ANY WARRANTY.
+
+## Funding
+
+This work is supported by European Union’s Horizon 2020 research and
+innovation programme under grant agreement No 101000365, project
+PREPARE4VBD (A Cross- Disciplinary Alliance to Identify, PREdict and
+prePARE for Emerging Vector-Borne Diseases).
